@@ -1,0 +1,14 @@
+<resources>
+    <string name="app_name"> Inplace Smart Placement Solutions</string>
+    <string name="title_activity_po_login">log in</string>
+    <string name="prompt_email">Username</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Log in</string>
+    <string name="form_name">Add Company Information</string>
+    <string name="form_name1">Add Job Information</string>
+    <string name="action_sign_in_short">Log in</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+</resources>
