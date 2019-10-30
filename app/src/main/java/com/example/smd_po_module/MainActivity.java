@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
-
+import com.example.smd_po_module.select_job_notify;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.squareup.picasso.Picasso;
@@ -34,12 +34,13 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
         Button b2;
         b2=findViewById(R.id.notify);
         b2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), notify_students1.class);
+                Intent i = new Intent(getApplicationContext(), select_job_notify.class);
                 startActivity(i);
             }
         });
