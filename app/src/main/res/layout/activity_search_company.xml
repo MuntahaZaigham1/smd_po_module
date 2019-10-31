@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".notify_students1">
+    tools:context=".Search_company">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -49,7 +49,7 @@
                 android:layout_gravity="center"
                 android:drawableLeft="@drawable/search"
                 android:fontFamily="@font/nunito"
-                android:hint="  Search for Jobs"
+                android:hint="  Search for Company"
                 android:textColor="@color/cfdialog_button_black_text_color"
                 android:textSize="18sp"
                 tools:layout_editor_absoluteX="16dp"
@@ -67,7 +67,6 @@
             app:layout_constraintTop_toBottomOf="@+id/toolbar">
 
         </androidx.recyclerview.widget.RecyclerView>
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

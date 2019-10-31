@@ -9,10 +9,16 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".view_job"></activity>
-        <activity android:name=".notify_students1" />
+        <activity android:name=".Add_selected1"></activity>
+        <activity android:name=".list_student" />
+        <activity android:name=".list_Jobs" />
+        <activity android:name=".view_company" />
+        <activity android:name=".Search_company" />
+        <activity android:name=".view_job" />
+        <activity android:name=".notify_students1"/>
         <activity android:name=".select_job_notify" />
-        <activity android:name=".Add_Job2" />
+        <activity android:name=".Add_Job2"
+            android:parentActivityName=".Add_Job"/>
         <activity android:name=".Add_Job" />
         <activity
             android:name=".ui.login.PO_login"

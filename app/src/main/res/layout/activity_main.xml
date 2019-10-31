@@ -113,38 +113,6 @@
         app:layout_constraintEnd_toEndOf="@+id/notify"
         app:layout_constraintStart_toStartOf="@+id/notify"
         app:layout_constraintTop_toBottomOf="@+id/notify" />
-    <Button
-        android:id="@+id/Search_Selected"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorPrimary"
-        android:drawableRight="@drawable/ic_arrow_forward_black_24dp"
-        android:fontFamily="@font/nunito"
-        android:text="Search for Selected Students"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/add_selected"
-        app:layout_constraintStart_toStartOf="@+id/add_selected"
-        app:layout_constraintTop_toBottomOf="@+id/add_selected" />
-    <Button
-        android:id="@+id/del_company"
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@color/colorPrimary"
-        android:drawableRight="@drawable/ic_arrow_forward_black_24dp"
-        android:fontFamily="@font/nunito"
-        android:text="Delete a Job offer"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/Search_Selected"
-        app:layout_constraintStart_toStartOf="@+id/Search_Selected"
-        app:layout_constraintTop_toBottomOf="@+id/Search_Selected" />
 
     <Button
         android:id="@+id/log_out"
@@ -159,9 +127,9 @@
         android:textColor="#FFFFFF"
         android:textSize="16sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="@+id/del_company"
-        app:layout_constraintStart_toStartOf="@+id/del_company"
-        app:layout_constraintTop_toBottomOf="@+id/del_company" />
+        app:layout_constraintEnd_toEndOf="@+id/add_selected"
+        app:layout_constraintStart_toStartOf="@+id/add_selected"
+        app:layout_constraintTop_toBottomOf="@+id/add_selected" />
 
 
 

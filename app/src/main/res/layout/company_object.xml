@@ -6,8 +6,7 @@
     android:layout_height="100dp"
     android:background="@color/background"
     android:orientation="vertical"
-    android:padding="6dp"
-    >
+    android:padding="6dp">
 
 
 
@@ -38,24 +37,11 @@
 
 
                 <TextView
-                    android:id="@+id/cname"
+                    android:id="@+id/email"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="55dp"
-                    android:text="Company name:"
-                    android:textSize="14sp"
-                    app:fontFamily="@font/roboto"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pos"
-                    card_view:ignore="MissingConstraints" />
-
-
-                <TextView
-                    android:id="@+id/salary"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="55dp"
-                    android:text="Salary:"
+                    android:text="Email:"
                     android:textSize="14sp"
                     app:fontFamily="@font/roboto"
                     app:layout_constraintStart_toStartOf="parent"
@@ -64,11 +50,24 @@
 
 
                 <TextView
-                    android:id="@+id/pos"
+                    android:id="@+id/ccmi"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="55dp"
+                    android:text="ccmi:"
+                    android:textSize="14sp"
+                    app:fontFamily="@font/roboto"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/email"
+                    card_view:ignore="MissingConstraints" />
+
+
+                <TextView
+                    android:id="@+id/cname"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="55dp"
-                    android:text="Position:"
+                    android:text="Netsol "
                     android:textColor="@color/black"
                     android:textSize="16sp"
                     app:fontFamily="@font/roboto"
@@ -81,11 +80,17 @@
                     android:layout_height="1dp"
                     android:layout_marginTop="10dp"
                     android:background="@color/grayColor"
-                    app:layout_constraintTop_toBottomOf="@+id/salary"
+                    app:layout_constraintTop_toBottomOf="@+id/ccmi"
                     card_view:ignore="MissingConstraints"
                     card_view:layout_editor_absoluteX="0dp" />
 
-
+                <RadioGroup
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/email"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

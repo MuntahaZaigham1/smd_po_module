@@ -9,6 +9,7 @@ import android.widget.TextView;
 import com.example.smd_po_module.select_job_notify;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.smd_po_module.ui.login.PO_login;
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
@@ -41,6 +42,33 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent i = new Intent(getApplicationContext(), select_job_notify.class);
+                startActivity(i);
+            }
+        });
+        Button b3;
+        b3=findViewById(R.id.add_job);
+        b3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Search_company .class);
+                startActivity(i);
+            }
+        });
+        Button b4;
+        b4=findViewById(R.id.add_selected);
+        b4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), Add_selected1 .class);
+                startActivity(i);
+            }
+        });
+        Button b5;
+        b5=findViewById(R.id.log_out);
+        b5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), PO_login.class);
                 startActivity(i);
             }
         });
