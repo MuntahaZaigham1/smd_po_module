@@ -68,7 +68,7 @@ public class adapter_job extends RecyclerView.Adapter<adapter_job.MyHolder>{
         public void onClick(View v) {
             int viewId = v.getId();
             System.out.println("global"+Global.intent);
-            if (Global.intent == 'J'&& Global.intent1!='T') {
+            if (Global.intent == 'J'&& Global.intent1!='T' && Global.intent1!='y') {
                 int pos = getAdapterPosition();
                 if (pos == 0) {
                     context.startActivity(new Intent(context, view_job.class));
@@ -81,7 +81,7 @@ public class adapter_job extends RecyclerView.Adapter<adapter_job.MyHolder>{
                 }
 
             }
-            else if (Global.intent == 'N'&& Global.intent1!='T') {
+            else if (Global.intent == 'N'&& Global.intent1!='T'&& Global.intent1!='y') {
                 int pos = getAdapterPosition();
                 if (pos == 0) {
                     context.startActivity(new Intent(context, view_job.class));
@@ -94,7 +94,48 @@ public class adapter_job extends RecyclerView.Adapter<adapter_job.MyHolder>{
                 }
 
             }
-            if(Global.intent == 'J' && Global.intent1=='T') {
+            else if (Global.intent == 'P'&& Global.intent1!='T') {
+                int pos = getAdapterPosition();
+                if (pos == 0) {
+                    context.startActivity(new Intent(context, Student_view_job.class));
+                } else if (pos == 1) {
+                    context.startActivity(new Intent(context, Student_view_job.class));
+                } else if (pos == 2) {
+                    context.startActivity(new Intent(context, Student_view_job.class));
+                } else if (pos == 3) {
+                    context.startActivity(new Intent(context, Student_view_job.class));
+                }
+
+            }
+            else if (Global.intent == 'J'&& Global.intent1!='T' && Global.intent1=='y') {
+                int pos = getAdapterPosition();
+                Global.intent = 'i';
+            if (pos == 0) {
+                    context.startActivity(new Intent(context, list_student.class));
+                } else if (pos == 1) {
+                    context.startActivity(new Intent(context, list_student.class));
+                } else if (pos == 2) {
+                    context.startActivity(new Intent(context, list_student.class));
+                } else if (pos == 3) {
+                    context.startActivity(new Intent(context, list_student.class));
+                }
+
+            }
+            else if (Global.intent == 'e'&& Global.intent1!='T' && Global.intent1!='y') {
+                int pos = getAdapterPosition();
+                Global.intent = 'i';
+                if (pos == 0) {
+                    context.startActivity(new Intent(context, Student_job_view1.class));
+                } else if (pos == 1) {
+                    context.startActivity(new Intent(context, Student_job_view1.class));
+                } else if (pos == 2) {
+                    context.startActivity(new Intent(context, Student_job_view1.class));
+                } else if (pos == 3) {
+                    context.startActivity(new Intent(context, Student_job_view1.class));
+                }
+
+            }
+            else if(Global.intent == 'J' && Global.intent1=='T') {
                 int pos = getAdapterPosition();
                 if (pos == 0) {
                     builder.setMessage("Do You want to add this job for selected Student?")

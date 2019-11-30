@@ -12,6 +12,8 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,9 +23,15 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.smd_po_module.Add_Job2;
+import com.example.smd_po_module.Landing_Student;
 import com.example.smd_po_module.MainActivity;
+import com.example.smd_po_module.MainActivityAdmin;
 import com.example.smd_po_module.R;
+import com.example.smd_po_module.studentsignup;
 import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
 
 public class PO_login extends AppCompatActivity {
 
@@ -124,12 +132,55 @@ public class PO_login extends AppCompatActivity {
         String welcome = getString(R.string.welcome) + model.getDisplayName();
         // TODO : initiate successful logged in experience
         //Toast.makeText(getApplicationContext(), welcome, Toast.LENGTH_LONG).show();
-        Intent i = new Intent(getApplicationContext(), MainActivity.class);
-        String name=model.getDisplayName();
-        final EditText usernameEditText = findViewById(R.id.username);
+        RadioGroup rg = (RadioGroup) findViewById(R.id.rg);
+        RadioButton radiob;
+        String module = null;
+        final String value =
+                ((RadioButton)findViewById(rg.getCheckedRadioButtonId()))
+                        .getText().toString();
+        int selectedId = rg.getCheckedRadioButtonId();
 
-        i.putExtra("name", usernameEditText.getText().toString());
-        startActivity(i);
+        // find the radiobutton by returned id
+        radiob = (RadioButton) findViewById(selectedId);
+        module=radiob.getText().toString();
+
+
+        /*rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+               module[0] =value;
+            }
+        });*/
+        ;
+        if(module.equals("As Student")){
+            System.out.println("student");
+            Intent i = new Intent(getApplicationContext(), Landing_Student.class);
+            final EditText usernameEditText = findViewById(R.id.username);
+
+            i.putExtra("name", usernameEditText.getText().toString());
+            startActivity(i);
+        }
+        else if(module.equals("As PO")){
+            System.out.println("po");
+
+            Intent i = new Intent(getApplicationContext(), MainActivity.class);
+            final EditText usernameEditText = findViewById(R.id.username);
+
+            i.putExtra("name", usernameEditText.getText().toString());
+            startActivity(i);
+        }
+        else if(module.equals("As Admin")){
+            System.out.println("admin");
+
+            Intent i = new Intent(getApplicationContext(), MainActivityAdmin.class);
+            final EditText usernameEditText = findViewById(R.id.username);
+
+           // i.putExtra("name", usernameEditText.getText().toString());
+            startActivity(i);
+
+        }
+
+
+
     }
 
     private void showLoginFailed(@StringRes Integer errorString) {

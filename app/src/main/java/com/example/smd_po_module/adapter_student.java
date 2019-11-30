@@ -187,6 +187,24 @@ public class adapter_student extends RecyclerView.Adapter<adapter_student.MyHold
                     context.startActivity(new Intent(context, list_Jobs.class));
                 }
             }
+            if(Global.intent == 'i'){
+
+
+            }
+            if(Global.intent == 'N'&& Global.intent1=='c'){
+
+                int pos = getAdapterPosition();
+                if (pos == 0) {
+
+                    context.startActivity(new Intent(context, chat_base.class));
+                } else if (pos == 1) {
+                    context.startActivity(new Intent(context, chat_base.class));
+                } else if (pos == 2) {
+                    context.startActivity(new Intent(context, chat_base.class));
+                } else if (pos == 3) {
+                    context.startActivity(new Intent(context, chat_base.class));
+                }
+            }
 
 
         }

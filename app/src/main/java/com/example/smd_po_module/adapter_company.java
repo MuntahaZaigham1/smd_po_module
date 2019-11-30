@@ -82,6 +82,7 @@ public class adapter_company extends RecyclerView.Adapter<adapter_company.MyHold
                 }
             }
 
+
         }
     }
 
