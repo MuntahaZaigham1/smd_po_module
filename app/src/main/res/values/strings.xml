@@ -14,6 +14,9 @@
     <string name="Global_intent">"d"</string>
     <string name="input_placeholder">Write a message</string>
     <string name="logo">logo</string>
+    <string name="user_name">username</string>
+    <string name="username_error">Username cannot be empty</string>
+    <string name="password_error">Password cannot be empty</string>
     <string name="screen1">Add Placement Officer</string>
     <string name="screen4">Student Signup</string>
     <string name="screen2">Placement Officer\'s Details</string>

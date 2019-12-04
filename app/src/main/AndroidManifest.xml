@@ -3,6 +3,7 @@
     package="com.example.smd_po_module">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
 
     <application
         android:allowBackup="true"
@@ -11,6 +12,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity" />
         <activity android:name=".chat_base" />
         <activity android:name=".Student_job_view1" />
         <activity android:name=".appliedjobs" />
@@ -34,8 +36,12 @@
         <activity android:name=".Add_Job" />
         <activity
             android:name=".add_po"
-            android:label="@string/screen1"
-            android:theme="@style/AppTheme" />
+            android:label="@string/screen1">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity
             android:name=".search"
             android:label="Search"
@@ -51,8 +57,13 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.login.PO_login"
-            android:label="@string/title_activity_po_login"></activity>
-        <activity android:name=".MainActivity" />
+            android:enabled="true"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
-
 </manifest>

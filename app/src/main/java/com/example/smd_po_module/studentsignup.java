@@ -3,21 +3,37 @@ package com.example.smd_po_module;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static java.lang.Integer.parseInt;
+
 public class studentsignup extends AppCompatActivity {
     Context context;
     AlertDialog.Builder builder;
+    DatabaseReference mDatabase;
+    String id;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     int a=1;
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -25,12 +41,14 @@ public class studentsignup extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.student_signup);
+        mDatabase = FirebaseDatabase.getInstance().getReference("student");
+        id= mDatabase.push().getKey();
 
         builder = new AlertDialog.Builder(this);
         EditText editText3 = findViewById(R.id. editText9 ) ;
         editText3.setFilters( new InputFilter[]{ new num()}) ;
-        EditText editText4 = findViewById(R.id. editText16 ) ;
-        editText4.setFilters( new InputFilter[]{ new ValidateFilterNum()}) ;
+       // EditText editText4 = findViewById(R.id. editText16 ) ;
+        //editText4.setFilters( new InputFilter[]{ new ValidateFilterNum()}) ;
         EditText editText5 = findViewById(R.id. editText14 ) ;
         editText5.setFilters( new InputFilter[]{ new ValidateFilterNum()}) ;
         Button button = findViewById(R.id.button);
@@ -73,9 +91,7 @@ public class studentsignup extends AppCompatActivity {
                                 .setCancelable(false)
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        Intent i = new Intent(getApplicationContext(), Landing_Student.class);
-                                        startActivity(i);
-                                        finish();
+                                        addStudent();
                                     }
                                 })
                                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -111,6 +127,79 @@ public class studentsignup extends AppCompatActivity {
         }
     }
 
+    public void addStudent(){
+        String skills = "";
+        int i=0;
+        EditText e= findViewById(R.id.editText4);
+        String name= e.getText().toString();
+        EditText e1= findViewById(R.id.editText5);
+        String email= e1.getText().toString();
+        EditText e2= findViewById(R.id.editText6);
+        String password= e2.getText().toString();
+        EditText e3= findViewById(R.id.editText12);
+        String phone= e3.getText().toString();
+        RadioGroup rg= findViewById(R.id.rg);
+        String gender = null;
+        final String value =
+                ((RadioButton)findViewById(rg.getCheckedRadioButtonId()))
+                        .getText().toString();
+        int selectedId = rg.getCheckedRadioButtonId();
+        RadioButton radiob;
+
+        // find the radiobutton by returned id
+        radiob = (RadioButton) findViewById(selectedId);
+        gender=radiob.getText().toString();
+        EditText e4= findViewById(R.id.editText7);
+        String degree= e4.getText().toString();
+        EditText e5= findViewById(R.id.editText9);
+        String gpa= e5.getText().toString();
+        Spinner mySpinner = (Spinner) findViewById(R.id.spinner);
+        int year = parseInt(mySpinner.getSelectedItem().toString());
+        CheckBox cb= findViewById(R.id.checkBox);
+        String web;
+        if(cb.isChecked()){
+            web=cb.getText().toString();
+            skills=web;
+        }
+        String android;
+        if(cb.isChecked()){
+            android=cb.getText().toString();
+            skills=android;
+        }
+        String database;
+        if(cb.isChecked()){
+            database=cb.getText().toString();
+            skills=database;
+        }
+        String networking;
+        if(cb.isChecked()){
+            networking=cb.getText().toString();
+            skills=networking;
+        }
+
+        EditText et= findViewById(R.id.editText14);
+        String experience= (et.getText().toString());
+
+
+        if((!TextUtils.isEmpty(name))&&(!TextUtils.isEmpty(email))&&(!TextUtils.isEmpty(password))&&(!TextUtils.isEmpty(degree))){
+            student s= new student(id, name,  email, password, phone, gender, skills, degree, gpa, year, experience);
+            mDatabase.child(id).setValue(s);
+            Toast.makeText(this,"student added successfully",Toast.LENGTH_LONG).show();
+            Intent in = new Intent(getApplicationContext(), Landing_Student.class);
+            System.out.println("ID IS "+ id);
+            in.putExtra("id", id);
+            SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0); // 0 - for private mode
+            SharedPreferences.Editor editor = pref.edit();
+            editor.putString(name, id); // Storing string
+            editor.commit();
+            startActivity(in);
+            finish();
+        }
+        else
+        {
+            Toast.makeText(this,"enter all values",Toast.LENGTH_LONG).show();
+        }
+    }
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
         super.onSaveInstanceState(savedInstanceState);

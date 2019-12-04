@@ -17,9 +17,9 @@ import java.util.ArrayList;
 public class poSearchadapter extends RecyclerView.Adapter<poSearchadapter.MyViewHolder> {
 
    Context context;
-   ArrayList<PO_DATA> data;
+   ArrayList<PlacementOfficer> data;
 
-    public poSearchadapter(Context context, ArrayList<PO_DATA> data) {
+    public poSearchadapter(Context context, ArrayList<PlacementOfficer> data) {
         this.context=context;
         this.data=data;
     }
@@ -33,10 +33,9 @@ public class poSearchadapter extends RecyclerView.Adapter<poSearchadapter.MyView
     }
     @Override
     public void onBindViewHolder(MyViewHolder myViewHolder, int position){
-        PO_DATA p= data.get(position);
-        myViewHolder.textview1.setText(p.name);
-
-
+        PlacementOfficer p= data.get(position);
+        myViewHolder.textview1.setText(p.getUsername());
+        myViewHolder.textview2.setText(p.getPid());
     }
     @Override
     public int getItemCount(){
@@ -47,6 +46,7 @@ public class poSearchadapter extends RecyclerView.Adapter<poSearchadapter.MyView
 
     class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
         TextView textview1;
+        TextView textview2;
 
         public MyViewHolder(View itemview)
         {
@@ -54,18 +54,26 @@ public class poSearchadapter extends RecyclerView.Adapter<poSearchadapter.MyView
             itemview.setOnClickListener(this);
             context = itemview.getContext();
             textview1= (TextView) itemview.findViewById(R.id.tv2);
+            textview2= (TextView) itemview.findViewById(R.id.id);
         }
 
         @Override
         public void onClick(View v) {
             int pos = getAdapterPosition();
             if (pos == 0) {
-                context.startActivity(new Intent(context, view_po.class));
+                Intent i= new Intent(context, view_po.class);
+                i.putExtra("id",textview2.getText().toString());
+                context.startActivity(i);
             } else if (pos == 1) {
-                context.startActivity(new Intent(context, view_po.class));
+                Intent i= new Intent(context, view_po.class);
+                i.putExtra("id",textview2.getText().toString());
+                context.startActivity(i);
             }
-            else
-                context.startActivity(new Intent(context, view_po.class));
+            else {
+                Intent i = new Intent(context, view_po.class);
+                i.putExtra("id", textview2.getText().toString());
+                context.startActivity(i);
+            }
         }
     }
 }

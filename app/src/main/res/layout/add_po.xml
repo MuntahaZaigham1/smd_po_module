@@ -91,9 +91,9 @@
             android:layout_gravity="center_horizontal"
             android:contentDescription="@string/logo"
             app:layout_constraintEnd_toEndOf="parent"
+            android:src="@drawable/logo"
             app:layout_constraintStart_toStartOf="@+id/textView"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/logo" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
             android:id="@+id/textView11"
@@ -211,6 +211,7 @@
 
 
         </androidx.cardview.widget.CardView>
+
 
         <Button
             android:id="@+id/button"
