@@ -6,25 +6,39 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.smd_po_module.imageutils.ImageLoader;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class add_po extends AppCompatActivity {
     Context context;
     AlertDialog.Builder builder;
+    DatabaseReference mDatabase;
+    String id;
+    ImageView imgView;
+    ImageLoader imgLoader;
     int a=1;
+    private String strURL = "http://technotalkative.com/android.jpg";
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_po);
+        mDatabase = FirebaseDatabase.getInstance().getReference("PlacementOfficer");
+        id= mDatabase.push().getKey();
+        System.out.println("IDDDDD"+id);
 
         builder = new AlertDialog.Builder(this);
 
@@ -38,7 +52,8 @@ public class add_po extends AppCompatActivity {
             public void onClick(View v) {
                 EditText editText = findViewById(R.id. editText4 ) ;
                 editText.setFilters( new InputFilter[]{ new ValidateFilter()}) ;
-                if(editText.getText().toString().isEmpty()) {
+                String s1= editText.getText().toString();
+                if(s1.isEmpty()) {
                     a=0;
                    // Toast.makeText(getApplicationContext(), "Name is required", Toast.LENGTH_SHORT).show();
                 }
@@ -65,9 +80,8 @@ public class add_po extends AppCompatActivity {
                                 .setCancelable(false)
                                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                        Intent i = new Intent(getApplicationContext(), view_po.class);
-                                        startActivity(i);
-                                        finish();
+                                        addPO();
+
                                     }
                                 })
                                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -101,7 +115,13 @@ public class add_po extends AppCompatActivity {
             editText3.setText(myString8);
             editText2.setText(myString7);
         }
+         imgView = (ImageView) findViewById(R.id.imageView2);
+        imgLoader = new ImageLoader(this);
+
+        imgLoader.DisplayImage(strURL, imgView);
     }
+
+
 
     @Override
     public void onSaveInstanceState(Bundle savedInstanceState) {
@@ -138,6 +158,36 @@ public class add_po extends AppCompatActivity {
         savedInstanceState.putString("MyString9", text9);
         // etc.
         super.onSaveInstanceState(savedInstanceState);
+    }
+
+    private void addPO(){
+        EditText uname=findViewById(R.id. editText4);
+        String name= uname.getText().toString().trim();
+        EditText uemail=findViewById(R.id. editText5);
+        String email= uemail.getText().toString().trim();
+        EditText upassword=findViewById(R.id. editText6);
+        String pass= upassword.getText().toString().trim();
+        EditText udegree=findViewById(R.id. editText7);
+        String degree= udegree.getText().toString().trim();
+        EditText utools=findViewById(R.id. editText9);
+        String tool= utools.getText().toString().trim();
+        EditText uyears=findViewById(R.id. editText8);
+        int years= Integer.parseInt(uyears.getText().toString().trim());
+        if((!TextUtils.isEmpty(name))&&(!TextUtils.isEmpty(email))&&(!TextUtils.isEmpty(pass))&&(!TextUtils.isEmpty(degree))&&(!TextUtils.isEmpty(tool))){
+            System.out.println("IDI"+id);
+           PlacementOfficer po= new PlacementOfficer(email,pass,degree,tool,name,id,years);
+           mDatabase.child(id).setValue(po);
+            Toast.makeText(this,"Officer added successfully",Toast.LENGTH_LONG).show();
+            Intent i = new Intent(getApplicationContext(), view_po.class);
+            System.out.println("ID IS "+ id);
+            i.putExtra("id", id);
+            startActivity(i);
+            finish();
+        }
+        else
+        {
+            Toast.makeText(this,"enter all values",Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

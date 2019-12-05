@@ -23,7 +23,7 @@ public class student_update extends AppCompatActivity {
         editText.setFilters( new InputFilter[]{ new ValidateFilter()}) ;
         EditText editText3 = findViewById(R.id. editText9 ) ;
         editText3.setFilters( new InputFilter[]{ new num()}) ;
-        EditText editText4 = findViewById(R.id. editText16 ) ;
+        EditText editText4 = findViewById(R.id. editText9 ) ;
         editText4.setFilters( new InputFilter[]{ new ValidateFilterNum()}) ;
         EditText editText5 = findViewById(R.id. editText14 ) ;
         editText5.setFilters( new InputFilter[]{ new ValidateFilterNum()}) ;

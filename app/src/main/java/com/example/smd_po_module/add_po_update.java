@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.text.InputFilter;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -15,8 +16,13 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class add_po_update extends AppCompatActivity {
     Context context;
+    DatabaseReference mDatabase;
+    String id;
     AlertDialog.Builder builder;
     String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
@@ -26,6 +32,8 @@ public class add_po_update extends AppCompatActivity {
         setContentView(R.layout.add_po_update);
 
         builder = new AlertDialog.Builder(this);
+        id = getIntent().getStringExtra("id");
+        mDatabase = FirebaseDatabase.getInstance().getReference("PlacementOfficer").child(id);
 
         EditText editText = findViewById(R.id. editText4 ) ;
         editText.setFilters( new InputFilter[]{ new ValidateFilter()}) ;
@@ -40,12 +48,14 @@ public class add_po_update extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"enter email address",Toast.LENGTH_SHORT).show();
                 }else {
                     if (emailId.getText().toString().trim().matches(emailPattern)) {
-                        Toast.makeText(getApplicationContext(),"valid email address",Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(getApplicationContext(),"valid email address",Toast.LENGTH_SHORT).show();
                         builder.setMessage("Account updated successfully")
                                 .setCancelable(false)
                                 .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                    public void onClick(DialogInterface dialog, int id) {
+                                    public void onClick(DialogInterface dialog, int id1) {
+                                        updatePO();
                                         Intent i = new Intent(getApplicationContext(), view_po.class);
+                                        i.putExtra("id",id);
                                         startActivity(i);
                                         finish();
                                     }
@@ -122,6 +132,30 @@ public class add_po_update extends AppCompatActivity {
         super.onSaveInstanceState(savedInstanceState);
     }
 
+    private void updatePO(){
+        EditText uname=findViewById(R.id. editText4);
+        String name= uname.getText().toString().trim();
+        EditText uemail=findViewById(R.id. editText5);
+        String email= uemail.getText().toString().trim();
+        EditText upassword=findViewById(R.id. editText6);
+        String pass= upassword.getText().toString().trim();
+        EditText udegree=findViewById(R.id. editText7);
+        String degree= udegree.getText().toString().trim();
+        EditText utools=findViewById(R.id. editText9);
+        String tool= utools.getText().toString().trim();
+        EditText uyears=findViewById(R.id. editText8);
+        int years= Integer.parseInt(uyears.getText().toString().trim());
+        if((!TextUtils.isEmpty(name))&&(!TextUtils.isEmpty(email))&&(!TextUtils.isEmpty(pass))&&(!TextUtils.isEmpty(degree))){
+
+            PlacementOfficer po= new PlacementOfficer(email,pass,degree,tool,name,id,years);
+            mDatabase.setValue(po);
+            Toast.makeText(this,"Officer updated successfully",Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            Toast.makeText(this,"enter all values",Toast.LENGTH_LONG).show();
+        }
+    }
     @Override
     public void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);

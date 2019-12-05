@@ -1,2 +1,3 @@
+include ':app', ':login'
 include ':app'
 rootProject.name='smd_po_module'

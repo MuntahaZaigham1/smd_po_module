@@ -31,7 +31,9 @@
     <string name="officer">Personal Detail</string>
     <string name="pass">Enter password:</string>
     <string name="year_prompt">Choose a country</string>
-
+    <string name="user_name">username</string>
+    <string name="username_error">Username cannot be empty</string>
+    <string name="password_error">Password cannot be empty</string>
     <string-array name="year_arrays">
         <item>2020</item>
         <item>2019</item>

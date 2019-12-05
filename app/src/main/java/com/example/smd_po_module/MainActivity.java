@@ -1,15 +1,18 @@
 package com.example.smd_po_module;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.example.smd_po_module.login.PO_login;
 import com.example.smd_po_module.select_job_notify;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.smd_po_module.ui.login.PO_login;
+
 import com.squareup.picasso.Picasso;
 
 public class MainActivity extends AppCompatActivity {
@@ -21,8 +24,10 @@ public class MainActivity extends AppCompatActivity {
         ImageView profileImage = findViewById(R.id.profile);
         Picasso.get().load(R.drawable.po_profile).into(profileImage);
         TextView po_name = findViewById(R.id.po_name);
-        Bundle extras = getIntent().getExtras();
-        String name = extras.getString("name");
+        SharedPreferences pref = getApplicationContext().getSharedPreferences("MyPref", 0);
+
+        String name= pref.getString("username", null);
+
         po_name.setText(name);
         TextView po_role = findViewById(R.id.po_role);
         po_role.setText("Placement Officer");
