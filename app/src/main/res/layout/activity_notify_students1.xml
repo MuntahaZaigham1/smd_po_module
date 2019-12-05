@@ -44,16 +44,31 @@
 
             <EditText
                 android:id="@+id/searchEditText"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_gravity="center|fill"
                 android:drawableLeft="@drawable/search"
                 android:fontFamily="@font/nunito"
-                android:hint="  Search for Students"
+                android:foregroundGravity="center"
+                android:gravity="center"
+                android:hint="  Search for Student"
                 android:textColor="@color/cfdialog_button_black_text_color"
                 android:textSize="18sp"
                 tools:layout_editor_absoluteX="16dp"
                 tools:layout_editor_absoluteY="5dp" />
+            <Button
+                android:id="@+id/search"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/cast_libraries_material_featurehighlight_outer_highlight_default_color"
+                android:fontFamily="@font/nunito_bold"
+                android:text="Search"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+                android:textColor="#FFFFFF"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="401dp"
+                tools:layout_editor_absoluteY="142dp" />
 
         </androidx.appcompat.widget.Toolbar>
 

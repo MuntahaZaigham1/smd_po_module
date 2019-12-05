@@ -3,6 +3,7 @@ package com.example.smd_po_module;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,14 +14,23 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smd_po_module.classes.company;
 import com.example.smd_po_module.classes.information_job;
+import com.example.smd_po_module.classes.job;
 
 import java.util.ArrayList;
 
 public class adapter_job extends RecyclerView.Adapter<adapter_job.MyHolder>{
     Context context;
-    ArrayList<information_job> getdata;
-    public adapter_job(Context context, ArrayList<information_job> getdata) {
+    ArrayList<job> getdata;
+    public void setList(ArrayList<job> c){
+        this.getdata=c;
+
+    }
+    public void refreshList(){
+        notifyDataSetChanged();
+    }
+    public adapter_job(Context context, ArrayList<job> getdata) {
         this.context=context;
         this.getdata=getdata;
     }
@@ -36,9 +46,9 @@ public class adapter_job extends RecyclerView.Adapter<adapter_job.MyHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull adapter_job.MyHolder holder, int position) {
-        holder.pos.setText((getdata.get(position).title[0]));
-        holder.cname.setText(getdata.get(position).title[1]);
-        holder.salary.setText(getdata.get(position).title[2]);
+        holder.pos.setText((getdata.get(position).getPosition()));
+        holder.cname.setText(getdata.get(position).getType_employement());
+        holder.salary.setText(getdata.get(position).getSalary());
 
 
 
@@ -70,15 +80,12 @@ public class adapter_job extends RecyclerView.Adapter<adapter_job.MyHolder>{
             System.out.println("global"+Global.intent);
             if (Global.intent == 'J'&& Global.intent1!='T' && Global.intent1!='y') {
                 int pos = getAdapterPosition();
-                if (pos == 0) {
-                    context.startActivity(new Intent(context, view_job.class));
-                } else if (pos == 1) {
-                    context.startActivity(new Intent(context, view_job.class));
-                } else if (pos == 2) {
-                    context.startActivity(new Intent(context, view_job.class));
-                } else if (pos == 3) {
-                    context.startActivity(new Intent(context, view_job.class));
-                }
+                Intent i=new Intent(context, view_job.class);
+                Bundle extras = new Bundle();
+                extras.putString("cid",getdata.get(pos).getCid());
+                extras.putString("jid",getdata.get(pos).getJid());
+                i.putExtras(extras);
+                context.startActivity(i);
 
             }
             else if (Global.intent == 'N'&& Global.intent1!='T'&& Global.intent1!='y') {

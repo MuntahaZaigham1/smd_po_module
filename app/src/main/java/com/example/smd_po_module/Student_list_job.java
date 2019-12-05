@@ -24,7 +24,7 @@ public class Student_list_job extends AppCompatActivity {
         ImageView profileImage = findViewById(R.id.profile);
         Picasso.get().load(R.drawable.logo).into(profileImage);
         recycler=findViewById(R.id.recyclerViewDemo);
-        adapter=new adapter_job(this, Job_data.getdata());
+        adapter=new adapter_job(this, Job_data.getdata(null));
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new LinearLayoutManager(this));
         Global.intent='P';

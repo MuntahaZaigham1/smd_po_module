@@ -1,8 +1,8 @@
 package com.example.smd_po_module.classes;
 
-import android.text.TextUtils;
 import android.util.Log;
 
+import com.example.smd_po_module.classes.message;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -13,19 +13,22 @@ import java.util.ArrayList;
 
 import static androidx.constraintlayout.widget.Constraints.TAG;
 
-public class Company_data {
+public class msg_data {
 
 
-    public static ArrayList<company> getdata(){
+    public  ArrayList<message> getdata(String s_uid,String s_name){
 
 
 
-        DatabaseReference ref1= FirebaseDatabase.getInstance().getReference("Company");
+        DatabaseReference ref1= FirebaseDatabase.getInstance().getReference("Message");
 
         //company comp;
-         ArrayList<company> data;
+        ArrayList<message> data;
+        ArrayList<message> extractData;
 
-        data = new ArrayList<company>();
+        data = new ArrayList<message>();
+        extractData = new ArrayList<message>();
+
         ref1.addListenerForSingleValueEvent(new ValueEventListener() {
 
 
@@ -35,8 +38,18 @@ public class Company_data {
 
             // Result will be holded Here
             for (DataSnapshot dsp : dataSnapshot.getChildren()) {
-                data.add(dsp.getValue(company.class)); //add result into array list
+                data.add(dsp.getValue(message.class)); //add result into array list
+                Log.e("here2","here2");
+                Log.e("data:",data.get(0).getMsg());
 
+
+
+            }
+            for(int i=0;i<data.size();i++){
+                if(data.get(i).getS_uid().equals(s_uid)&& data.get(i).getS_name().equals(s_name)){
+                    extractData.add(data.get(i));
+                    Log.e("data:",extractData.get(0).getMsg());
+                }
 
             }
 
@@ -55,7 +68,7 @@ public class Company_data {
 
 
 
-        return data;
+        return extractData;
     }
 
 }

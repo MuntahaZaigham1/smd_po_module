@@ -1,5 +1,8 @@
 package com.example.smd_po_module;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,17 +13,12 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
-import com.example.smd_po_module.classes.company;
 import com.example.smd_po_module.classes.job;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.squareup.picasso.Picasso;
 
-public class Add_Job2 extends AppCompatActivity {
-
+public class add_more_jobs extends AppCompatActivity {
     AlertDialog.Builder builder;
     EditText position;
     EditText salary;
@@ -31,11 +29,10 @@ public class Add_Job2 extends AppCompatActivity {
     String pid;
     FirebaseDatabase database = FirebaseDatabase.getInstance();
     DatabaseReference jRef = database.getReference("Job");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_add__job2);
+        setContentView(R.layout.activity_add_more_jobs);
         ImageView profileImage = findViewById(R.id.profile);
         Picasso.get().load(R.drawable.logo).into(profileImage);
         Bundle extras = getIntent().getExtras();
@@ -46,8 +43,19 @@ public class Add_Job2 extends AppCompatActivity {
         skill_set= findViewById(R.id.editText2);
         responsibilities= findViewById(R.id.editText4);
 
+        Button cancel= findViewById(R.id.cancel);
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                i.putExtra("name","name");
+                startActivity(i);
+                Toast.makeText(getApplicationContext(),"Okay cancelled.",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        Button but=findViewById(R.id.button);
+                Button but=findViewById(R.id.button);
         builder = new AlertDialog.Builder(this);
         but.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,8 +69,8 @@ public class Add_Job2 extends AppCompatActivity {
                         .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 addJob();
-                                Intent i = new Intent(getApplicationContext(), add_more_jobs.class);
-                                i.putExtra("cid", cid);
+                                Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                                i.putExtra("name","name");
                                 startActivity(i);
                                 //finish();
                                 Toast.makeText(getApplicationContext(),"Going to add this offer",
@@ -84,10 +92,7 @@ public class Add_Job2 extends AppCompatActivity {
                 alert.show();
             }
         });
-
-
     }
-
     private void addJob() {
         String pos=position.getText().toString().trim();
         String sal=salary.getText().toString().trim();

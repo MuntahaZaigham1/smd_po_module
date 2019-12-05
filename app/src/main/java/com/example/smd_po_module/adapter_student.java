@@ -3,6 +3,7 @@ package com.example.smd_po_module;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,14 +17,23 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.smd_po_module.classes.information_stud;
+import com.example.smd_po_module.classes.job;
+import com.example.smd_po_module.classes.student;
 
 import java.util.ArrayList;
 
 public class adapter_student extends RecyclerView.Adapter<adapter_student.MyHolder> {
 
     Context context;
-    ArrayList<information_stud> getdata;
-    public adapter_student(Context context, ArrayList<information_stud> getdata) {
+    ArrayList<student> getdata;
+    public void setList(ArrayList<student> c){
+        this.getdata=c;
+
+    }
+    public void refreshList(){
+        notifyDataSetChanged();
+    }
+    public adapter_student(Context context, ArrayList<student> getdata) {
         this.context=context;
         this.getdata=getdata;
     }
@@ -39,9 +49,9 @@ public class adapter_student extends RecyclerView.Adapter<adapter_student.MyHold
 
     @Override
     public void onBindViewHolder(@NonNull MyHolder holder, int position) {
-        holder.sname.setText((getdata.get(position).title[0]));
-        holder.batch.setText(getdata.get(position).title[1]);
-        holder.cgpa.setText(getdata.get(position).title[2]);
+        holder.sname.setText((getdata.get(position).getName()));
+        holder.batch.setText(getdata.get(position).getDegree());
+        holder.cgpa.setText(getdata.get(position).getGpa());
 
 
 
@@ -74,104 +84,9 @@ public class adapter_student extends RecyclerView.Adapter<adapter_student.MyHold
             int viewId = v.getId();
             if(Global.intent == 'S') {
                 int pos = getAdapterPosition();
-                if (pos == 0) {
-                    builder.setMessage("Do You want to notify this offer?")
-                            .setCancelable(false)
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    context.startActivity(new Intent(context, select_job_notify.class));
-
-                                    //Toast.makeText(getApplicationContext(),"you choose yes ",
-                                           // Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //  Action for 'NO' Button
-                                    dialog.cancel();
-                                   // Toast.makeText(getApplicationContext(),"you choose no ",
-                                        //    Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                    //Creating dialog box
-                    AlertDialog alert = builder.create();
-                    //Setting the title manually
-                    alert.setTitle("Confirmation");
-                    alert.show();
-
-                } else if (pos == 1) {
-                    builder.setMessage("Do You want to notify this offer?")
-                            .setCancelable(false)
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    context.startActivity(new Intent(context, select_job_notify.class));
-
-                                    //Toast.makeText(getApplicationContext(),"you choose yes ",
-                                    // Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //  Action for 'NO' Button
-                                    dialog.cancel();
-                                    // Toast.makeText(getApplicationContext(),"you choose no ",
-                                    //    Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                    //Creating dialog box
-                    AlertDialog alert = builder.create();
-                    //Setting the title manually
-                    alert.setTitle("Confirmation");
-                    alert.show();
-                } else if (pos == 2) {
-                    builder.setMessage("Do You want to notify this offer?")
-                            .setCancelable(false)
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    context.startActivity(new Intent(context, select_job_notify.class));
-
-                                    //Toast.makeText(getApplicationContext(),"you choose yes ",
-                                    // Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //  Action for 'NO' Button
-                                    dialog.cancel();
-                                    // Toast.makeText(getApplicationContext(),"you choose no ",
-                                    //    Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                    //Creating dialog box
-                    AlertDialog alert = builder.create();
-                    //Setting the title manually
-                    alert.setTitle("Confirmation");
-                    alert.show();
-                } else if (pos == 3) {
-                    builder.setMessage("Do You want to notify this offer?")
-                            .setCancelable(false)
-                            .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    context.startActivity(new Intent(context, select_job_notify.class));
-
-                                    //Toast.makeText(getApplicationContext(),"you choose yes ",
-                                    // Toast.LENGTH_SHORT).show();
-                                }
-                            })
-                            .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int id) {
-                                    //  Action for 'NO' Button
-                                    dialog.cancel();
-                                    // Toast.makeText(getApplicationContext(),"you choose no ",
-                                    //    Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                    //Creating dialog box
-                    AlertDialog alert = builder.create();
-                    //Setting the title manually
-                    alert.setTitle("Confirmation");
-                    alert.show();
-                }
+                Intent i= new Intent(context, show_student.class);
+                i.putExtra("sid",getdata.get(pos).getId());
+                context.startActivity(i);
             }
             if(Global.intent == 'T'){
                 Global.intent1='T';
@@ -194,15 +109,37 @@ public class adapter_student extends RecyclerView.Adapter<adapter_student.MyHold
             if(Global.intent == 'N'&& Global.intent1=='c'){
 
                 int pos = getAdapterPosition();
-                if (pos == 0) {
 
-                    context.startActivity(new Intent(context, chat_base.class));
+                if (pos == 0) {
+                    Intent i=new Intent(context, chat_base.class);
+                    Bundle extras = new Bundle();
+                    extras.putString("r_uid", "L164329");
+                    extras.putString("r_name","Abiha");
+                    context.startActivity(i);
+                   // context.startActivity(new Intent(context, chat_base.class));
                 } else if (pos == 1) {
-                    context.startActivity(new Intent(context, chat_base.class));
+                    Intent i=new Intent(context, chat_base.class);
+                    Bundle extras = new Bundle();
+                    extras.putString("r_uid", "L164329");
+                    extras.putString("r_name","Abiha");
+                    context.startActivity(i);
+                    //  context.startActivity(new Intent(context, chat_base.class));
                 } else if (pos == 2) {
-                    context.startActivity(new Intent(context, chat_base.class));
+                    Intent i=new Intent(context, chat_base.class);
+                    Bundle extras = new Bundle();
+                    extras.putString("r_uid", "L164329");
+                    extras.putString("r_name","Abiha");
+                    context.startActivity(i);
+                    //context.startActivity(new Intent(context, chat_base.class));
                 } else if (pos == 3) {
-                    context.startActivity(new Intent(context, chat_base.class));
+                    Intent i=new Intent(context, chat_base.class);
+                    Bundle extras = new Bundle();
+                    String r_uid="L164329";
+                    String r_name="Abiha";
+                    extras.putString("r_uid",r_uid );
+                    extras.putString("r_name",r_name);
+                    context.startActivity(i);
+                    //context.startActivity(new Intent(context, chat_base.class));
                 }
             }
 

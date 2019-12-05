@@ -2,6 +2,7 @@ package com.example.smd_po_module;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,24 @@ import androidx.annotation.NonNull;
 import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.smd_po_module.classes.company;
 import com.example.smd_po_module.classes.information_company;
 
 import java.util.ArrayList;
 
+import static androidx.constraintlayout.widget.Constraints.TAG;
+
 public class adapter_company extends RecyclerView.Adapter<adapter_company.MyHolder>{
     Context context;
-    ArrayList<information_company> getdata;
-    public adapter_company(Context context, ArrayList<information_company> getdata) {
+    ArrayList<company> getdata;
+    public void setList(ArrayList<company> c){
+        this.getdata=c;
+
+    }
+    public void refreshList(){
+        notifyDataSetChanged();
+    }
+    public adapter_company(Context context, ArrayList<company> getdata) {
         this.context=context;
         this.getdata=getdata;
     }
@@ -34,9 +45,10 @@ public class adapter_company extends RecyclerView.Adapter<adapter_company.MyHold
 
     @Override
     public void onBindViewHolder(@NonNull adapter_company.MyHolder holder, int position) {
-        holder.cname.setText((getdata.get(position).title[0]));
-        holder.email.setText(getdata.get(position).title[1]);
-        holder.cmmi.setText(getdata.get(position).title[2]);
+
+        holder.cname.setText((getdata.get(position).getName()));
+        holder.email.setText(getdata.get(position).getEmail());
+        holder.cmmi.setText(getdata.get(position).getCmmi());
 
 
 
@@ -71,15 +83,11 @@ public class adapter_company extends RecyclerView.Adapter<adapter_company.MyHold
             int viewId = v.getId();
             if(Global.intent == 'L') {
                 int pos = getAdapterPosition();
-                if (pos == 0) {
-                    context.startActivity(new Intent(context, view_company.class));
-                } else if (pos == 1) {
-                    context.startActivity(new Intent(context, view_company.class));
-                } else if (pos == 2) {
-                    context.startActivity(new Intent(context, view_company.class));
-                } else if (pos == 3) {
-                    context.startActivity(new Intent(context, view_company.class));
-                }
+
+                    Intent i=new Intent(context, view_company.class);
+                     i.putExtra("cid",getdata.get(pos).getCid());
+                    context.startActivity(i);
+
             }
 
 

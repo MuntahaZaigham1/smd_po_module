@@ -11,6 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".company_update"></activity>
+        <activity android:name=".job_update" />
+        <activity android:name=".add_more_jobs" />
+        <activity android:name=".show_student" />
+        <activity android:name=".stud_show_student" />
         <activity android:name=".chat_base" />
         <activity android:name=".Student_job_view1" />
         <activity android:name=".appliedjobs" />
@@ -51,7 +56,13 @@
             android:theme="@style/AppTheme" />
         <activity
             android:name=".ui.login.PO_login"
-            android:label="@string/title_activity_po_login"></activity>
+            android:label="@string/title_activity_po_login">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
         <activity android:name=".MainActivity" />
     </application>
 

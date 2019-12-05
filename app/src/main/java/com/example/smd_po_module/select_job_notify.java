@@ -25,7 +25,7 @@ public class select_job_notify extends AppCompatActivity {
         Global.intent='N';
         Picasso.get().load(R.drawable.logo).into(profileImage);
         recycler=findViewById(R.id.recyclerViewDemo);
-        adapter=new adapter_job(this, Job_data.getdata());
+        adapter=new adapter_job(this, Job_data.getdata(null));
         recycler.setAdapter(adapter);
         recycler.setLayoutManager(new LinearLayoutManager(this));
 
