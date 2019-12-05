@@ -15,6 +15,9 @@
         android:theme="@style/AppTheme">
         <activity android:name=".company_update"></activity>
         <activity android:name=".job_update" />
+        <activity android:name=".MainActivityAdmin" />
+        <activity android:name=".Landing_Student" />
+
         <activity android:name=".add_more_jobs" />
         <activity android:name=".show_student" />
         <activity android:name=".stud_show_student" />

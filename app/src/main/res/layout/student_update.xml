@@ -9,8 +9,8 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/background"
-        android:layout_height="match_parent"
         android:orientation="vertical">
 
 
@@ -18,8 +18,8 @@
             android:id="@+id/cardView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:cardCornerRadius="20dp"
             android:layout_marginTop="2dp"
+            app:cardCornerRadius="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,14 +35,14 @@
                 android:ems="10"
                 android:text="Gender:"
                 android:textSize="16sp" />
+
             <RadioGroup
                 android:id="@+id/rg"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="140dp"
                 android:layout_marginTop="195dp"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <RadioButton
                     android:id="@+id/radioButton3"
@@ -140,8 +140,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
-            android:src="@drawable/logo"
             android:contentDescription="@string/logo"
+            android:src="@drawable/logo"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="@+id/textView"
             app:layout_constraintTop_toTopOf="parent" />
@@ -205,9 +205,9 @@
             <CheckBox
                 android:id="@+id/checkBox"
                 android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/start1"
                 android:layout_marginTop="155dp"
-                android:layout_height="wrap_content"
                 android:text="Web Development" />
 
             <CheckBox
@@ -315,7 +315,6 @@
                 android:inputType="number" />
 
 
-
             <Spinner
                 android:id="@+id/spinner"
                 android:layout_width="180dp"
@@ -349,7 +348,7 @@
             android:background="@color/white"
             android:text="Deactivate"
             app:layout_constraintBottom_toBottomOf="@+id/button"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"/>
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

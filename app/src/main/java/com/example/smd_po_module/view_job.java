@@ -3,6 +3,7 @@ package com.example.smd_po_module;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -85,7 +86,13 @@ public class view_job extends AppCompatActivity {
                 jb = dataSnapshot.getValue(job.class);
                 if(jb==null){}
                 else {
+                    String j_name;
+                    SharedPreferences pref1 = getApplicationContext().getSharedPreferences("MyPref1", 0); // 0 - for private mode
+                    SharedPreferences.Editor editor = pref1.edit();
+                    j_name=jb.getPosition();
+                    editor.putString(jid, j_name);// Storing string
 
+                    editor.commit();
                     position.setText(jb.getPosition());
                     salary.setText(jb.getSalary());
                     type_employment.setText(jb.getType_employement());
@@ -125,6 +132,11 @@ public class view_job extends AppCompatActivity {
                     //no_recruites.setText(comp.getNo_recruits());
                     email_address.setText(comp.getEmail());
                     //phone.setText(comp.getPhone());
+                    String c_name;
+                    SharedPreferences pref2 = getApplicationContext().getSharedPreferences("MyPref2", 0); // 0 - for private mode
+                    SharedPreferences.Editor editor = pref2.edit();
+                    c_name=comp.getName();
+                    editor.putString(cid, c_name);// Storing string
                 }
             }
 

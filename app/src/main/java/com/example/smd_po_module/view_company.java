@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -121,6 +122,7 @@ public class view_company extends Activity {
             public void onClick(View v) {
                 Global.intent = 'N';
                 Global.intent = 'y';
+
                 Intent i = new Intent(getApplicationContext(), list_Jobs.class);
                 i.putExtra("cid", cid);
                 startActivity(i);
@@ -138,6 +140,7 @@ public class view_company extends Activity {
                 company comp = dataSnapshot.getValue(company.class);
                 if(comp==null){}
                 else {
+
                     Log.d(TAG, "User name: " + comp.getName() + ", email " + comp.getEmail());
                     name.setText(comp.getName());
                     cmmi.setText(comp.getCmmi());

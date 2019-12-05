@@ -3,6 +3,7 @@ package com.example.smd_po_module;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -15,6 +16,7 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.smd_po_module.classes.company;
+import com.example.smd_po_module.classes.selected;
 import com.example.smd_po_module.classes.student;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -56,7 +58,34 @@ public class show_student extends AppCompatActivity {
         degree=findViewById(R.id.textView5);
         experience= findViewById(R.id.textView10);
         skills= findViewById(R.id.textView14);
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference selRef = database.getReference("selected");
+        String jid;
+        String cid;
+        String c_name;
+        String j_name;
         showStudent();
+        SharedPreferences pref1 = getApplicationContext().getSharedPreferences("MyPref1", 0);
+        jid= pref1.getString("jid", null);
+
+            j_name = pref1.getString("j_name", null);
+           // System.out.println("id in SP "+id);
+        SharedPreferences pref2 = getApplicationContext().getSharedPreferences("MyPref2", 0);
+        cid= pref2.getString("cid", null);
+
+        c_name = pref2.getString("c_name", null);
+        Button select = findViewById(R.id.select);
+        select.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                String id=selRef.push().getKey();
+
+
+                selected sel=new selected(id,sid,jid,j_name,cid,c_name);
+
+                selRef.child(id).setValue(sel);
+                Toast.makeText(getApplicationContext(), "Student Added as selected", Toast.LENGTH_SHORT).show();
+
+            }});
         Button but = findViewById(R.id.button12);
         builder = new AlertDialog.Builder(this);
         but.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +124,7 @@ public class show_student extends AppCompatActivity {
 
     private void showStudent() {
         sRef.child(sid).addValueEventListener(new ValueEventListener() {
+
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
@@ -112,6 +142,7 @@ public class show_student extends AppCompatActivity {
                     phone.setText(stud.getPhoneNo());
                     skills.setText(stud.getSkills());
                 }
+
             }
 
             @Override
